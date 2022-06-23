@@ -1,0 +1,221 @@
+[
+    {
+        "id": "2a20e2fdea28d964",
+        "type": "tab",
+        "label": "Flow 4",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "7d501a24dfd274e2",
+        "type": "mqtt in",
+        "z": "2a20e2fdea28d964",
+        "name": "",
+        "topic": "codigoIoT/g7/mosquitto/msg",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "8c122d4c3e973ade",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 140,
+        "y": 140,
+        "wires": [
+            [
+                "173e3e71e0ab0436"
+            ]
+        ]
+    },
+    {
+        "id": "173e3e71e0ab0436",
+        "type": "json",
+        "z": "2a20e2fdea28d964",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 330,
+        "y": 140,
+        "wires": [
+            [
+                "706e74817f90dfd1",
+                "3c9befc72750952e"
+            ]
+        ]
+    },
+    {
+        "id": "706e74817f90dfd1",
+        "type": "debug",
+        "z": "2a20e2fdea28d964",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 330,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "3c9befc72750952e",
+        "type": "function",
+        "z": "2a20e2fdea28d964",
+        "name": "",
+        "func": "msg.topic=msg.payload.id;\nmsg.payload=msg.payload.temp;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 140,
+        "wires": [
+            [
+                "41055cd9dc883be7"
+            ]
+        ]
+    },
+    {
+        "id": "41055cd9dc883be7",
+        "type": "ui_chart",
+        "z": "2a20e2fdea28d964",
+        "name": "",
+        "group": "91fbad6849e4d7c4",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "label": "Temperatura de los alumnos",
+        "chartType": "line",
+        "legend": "true",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "45",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 740,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d07f8f8be816be89",
+        "type": "inject",
+        "z": "2a20e2fdea28d964",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "15",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"id\":\"Lizbeth\",\"temp\":25.5}",
+        "payloadType": "str",
+        "x": 90,
+        "y": 320,
+        "wires": [
+            [
+                "2fa4363ce6d1210b"
+            ]
+        ]
+    },
+    {
+        "id": "2fa4363ce6d1210b",
+        "type": "mqtt out",
+        "z": "2a20e2fdea28d964",
+        "name": "",
+        "topic": "codigoIoT/g7/mosquitto/msg",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "8c122d4c3e973ade",
+        "x": 360,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "8c122d4c3e973ade",
+        "type": "mqtt-broker",
+        "name": "Broker HiveMQ G7",
+        "broker": "35.157.252.226",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    },
+    {
+        "id": "91fbad6849e4d7c4",
+        "type": "ui_group",
+        "name": "Grupo grafica",
+        "tab": "5b2d829bb89687e7",
+        "order": 2,
+        "disp": true,
+        "width": "12",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "5b2d829bb89687e7",
+        "type": "ui_tab",
+        "name": "Flow4",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    }
+]
